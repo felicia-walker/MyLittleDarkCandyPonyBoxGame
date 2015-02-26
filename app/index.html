@@ -11,24 +11,20 @@
     <div ng-controller="TitleBarController as ctrl">
         <span>My Little Dark Candy Pony Box Game </span>
         <span>(v {{ctrl.major}}.{{ctrl.minor}})</span>
+        <span>Links go here...</span>
     </div>
     <div>
-        <span>Log</<span>
-        <span>Main</<span>
+        <span ng-controller="HistoryController">Log</span>
+        <span>Main</span>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-route.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-    <script type = "text/javascript">
-    var app = angular.module('ponyApp', []);
-
-    app.controller('TitleBarController', function() {
-        var self = this;
-        self.major = 0;
-        self.minor = 1;
-    });
-    </script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/titlebar.js"></script>
+    <script src="scripts/controllers/history.js"></script>
 </body>
 </html>
