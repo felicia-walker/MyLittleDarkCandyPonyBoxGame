@@ -1,21 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="ponyApp">
 <head>
-    <title>My Little Dark Candy Pony Box Game</title>
-    <meta charset="utf-8">
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/main.css">
+<title>My Little Dark Candy Pony Box Game</title>
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <div ng-controller="TitleBarController as ctrl">
-        <span>My Little Dark Candy Pony Box Game </span>
-        <span>(v {{ctrl.major}}.{{ctrl.minor}})</span>
-        <span>Links go here...</span>
+    <div class="navbar navbar-default" ng-controller="TitleBarController as ctrl">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span> 
+                    <span class="icon-bar"></span> 
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <p class="navbar-brand">My Little Dark Candy Pony Box Game</p>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><p class="navbar-text">(v {{ctrl.major}}.{{ctrl.minor}})</p></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><p class="navbar-text">Links go here...</p></li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div>
-        <span ng-controller="HistoryController">Log</span>
-        <span>Main</span>
+    <div class="row">
+        <div class="col-md-3 panel panel-default" ng-controller="HistoryController">
+            <div class="panel-body">
+                Log messages go here...
+            </div>
+        </div>
+        <div class="col-md-9">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#a">One</a></li>
+                <li><a data-toggle="tab" href="#b">Two</a></li>
+                <li><a data-toggle="tab" href="#c">Three</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="a" class="tab-pane active">AAAAAAA</div>
+                <div id="b" class="tab-pane">bbbbb</div>
+                <div id="c" class="tab-pane">ccccc</div>
+            </div>
+        </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
