@@ -34,19 +34,12 @@
                 Log messages go here...
             </div>
         </div>
-        <div class="col-md-9" ng-controller="TabController as ctrl">
-            <ul class="nav nav-tabs">
-                <li ng-repeat="tab in ctrl.tabs">
-                    <a data-toggle="tab" ng-href="#{{tab.url}}">{{tab.title}}</a>
-                </li>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div id="town" class="tab-pane active">AAAAAAA</div>
-                <div id="roster" class="tab-pane">bbbbb</div>
-                <div id="options" class="tab-pane">ccccc</div>
-                <div id="achievements" class="tab-pane">ddddd</div>
-            </div>
+        <div class="col-md-9" ng-controller="TabController">
+            <tabset>
+                <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" select="onTabSelected(tab.url)">
+                    <div ng-view></div>
+                </tab>
+            </tabset>
         </div>
     </div>
 
@@ -54,11 +47,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-route.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-        <script src="lib/ui-bootstrap-tpls-0.12.1.js"></script>
+    <script src="lib/ui-bootstrap-tpls-0.12.1.js"></script>
 
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/titlebar.js"></script>
     <script src="scripts/controllers/history.js"></script>
     <script src="scripts/controllers/tab.js"></script>
+    <script src="scripts/controllers/town.js"></script>
+    <script src="scripts/controllers/roster.js"></script>
+    <script src="scripts/controllers/options.js"></script>
+    <script src="scripts/controllers/achievements.js"></script>
 </body>
 </html>
