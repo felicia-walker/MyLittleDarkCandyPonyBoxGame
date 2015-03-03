@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <div class="navbar navbar-default" ng-controller="TitleBarController as ctrl">
+    <div class="navbar navbar-default" ng-controller="HeaderController as ctrl">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -23,7 +23,7 @@
                     <li><p class="navbar-text">(v {{ctrl.major}}.{{ctrl.minor}})</p></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><p class="navbar-text">Links go here...</p></li>
+                    <li ng-repeat="link in ctrl.links"><p class="navbar-text">{{link.title}}</p></li>
                 </ul>
             </div>
         </div>
@@ -31,7 +31,7 @@
     <div class="row">
         <div class="col-md-3 panel panel-default" ng-controller="HistoryController as ctrl">
             <div class="panel-body">
-                Log messages go here...
+                <p ng-repeat="line in ctrl.get()">{{line}}</p>
             </div>
         </div>
         <div class="col-md-9" ng-controller="TabController">
@@ -50,7 +50,9 @@
     <script src="lib/ui-bootstrap-tpls-0.12.1.js"></script>
 
     <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/titlebar.js"></script>
+	<script src="scripts/services/history.js"></script>
+
+    <script src="scripts/controllers/header.js"></script>
     <script src="scripts/controllers/history.js"></script>
     <script src="scripts/controllers/tab.js"></script>
     <script src="scripts/controllers/town.js"></script>

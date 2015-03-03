@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ponyApp').controller('TitleBarController', [function() {
+angular.module('ponyApp').controller('HeaderController', [function() {
 	var self = this;
 	self.major = 0;
 	self.minor = 2;
