@@ -40,7 +40,7 @@ module.exports = function(config) {
     port: 9876,
 
     // enable / disable colors in the output (reporters and logs)
-    colors: true,
+    colors: false,
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
@@ -48,7 +48,7 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
+    autoWatch: false,
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher

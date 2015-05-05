@@ -3,20 +3,33 @@ describe('Service: HistoryService', function() {
 
   var ONE = "one";
   var TWO = "two";
-  
-  var serv;
-  
+
+  var HistoryService;
+
   beforeEach(inject(function(_HistoryService_) {
-	  serv = _HistoryService_;
+    HistoryService = _HistoryService_;
   }));
 
-  it('Initial size is zero', function() {
-    expect(serv.list.length).toBe(0);
+  it('Loaded', function() {
+    expect(HistoryService).toBeDefined();
   });
   
-  describe('Adding an item, ', function() {
-//    it('one item', function() {
-//    	serv.add(ONE).then(expect(serv.list.length).toBe(1));
-//	});
+  xit('Initial size is zero', function() {
+    spyOn(HistoryService, 'list');
+    var result = HistoryService.list();
+
+    expect(HistoryService.list).toHaveBeenCalled();
+    expect(result).toBeDefined();
+  });
+
+  xdescribe('Adding an item, ', function() {
+    it('one item', function() {
+      spyOn(HistoryService, 'add');
+      HistoryService.add(ONE);
+      var list = HistoryService.list();
+
+      expect(HistoryService.add).toHaveBeenCalled();
+      expect(list.length).toBe(1);
+    });
   });
 });

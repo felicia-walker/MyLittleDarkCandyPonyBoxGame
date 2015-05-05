@@ -8,3 +8,5 @@ app/lib/angular.js
 app/lib/angular-route.js
 test/lib/angular-mocks.js
 test/lib/ngMock.js
+target/KaramTestRunner-1.jar
+target/maven-archiver/pom.properties
