@@ -3,6 +3,10 @@ describe('Service: HistoryService', function() {
 
   var ONE = "one";
   var TWO = "two";
+  var THREE = "three"
+  var EMPTY_QUEUE = [];
+  var ONE_ITEM_QUEUE = [ONE];
+  var MULT_ITEM_QUEUE = [ONE, THREE, TWO];
 
   var HistoryService;
 
@@ -14,22 +18,57 @@ describe('Service: HistoryService', function() {
     expect(HistoryService).toBeDefined();
   });
   
-  xit('Initial size is zero', function() {
-    spyOn(HistoryService, 'list');
+  it('Initial size is zero', function() {
+    spyOn(HistoryService, 'list').and.callThrough();
     var result = HistoryService.list();
 
     expect(HistoryService.list).toHaveBeenCalled();
-    expect(result).toBeDefined();
+    expect(result).toEqual(EMPTY_QUEUE);
   });
 
-  xdescribe('Adding an item, ', function() {
+  describe('Adding an item, ', function() {
     it('one item', function() {
-      spyOn(HistoryService, 'add');
+      spyOn(HistoryService, 'add').and.callThrough();
       HistoryService.add(ONE);
       var list = HistoryService.list();
 
       expect(HistoryService.add).toHaveBeenCalled();
-      expect(list.length).toBe(1);
+      expect(list).toEqual(ONE_ITEM_QUEUE);
+    });
+    
+    it('multiple items', function() {
+      spyOn(HistoryService, 'add').and.callThrough();
+      HistoryService.add(ONE);
+      HistoryService.add(THREE);
+      HistoryService.add(TWO);
+      var list = HistoryService.list();
+
+      expect(HistoryService.add).toHaveBeenCalled();
+      expect(list).toEqual(MULT_ITEM_QUEUE);
+    });
+  });
+  
+  describe('Clearning the queue, ', function() {
+    it('empty', function() {
+      spyOn(HistoryService, 'clear').and.callThrough();
+      HistoryService.add(ONE);
+      HistoryService.clear();
+      var list = HistoryService.list();
+
+      expect(HistoryService.clear).toHaveBeenCalled();
+      expect(list).toEqual(EMPTY_QUEUE);
+    });
+    
+    it('multiple items', function() {
+      spyOn(HistoryService, 'clear').and.callThrough();
+      HistoryService.add(ONE);
+      HistoryService.add(THREE);
+      HistoryService.add(TWO);
+      HistoryService.clear();
+      var list = HistoryService.list();
+
+      expect(HistoryService.clear).toHaveBeenCalled();
+      expect(list).toEqual(EMPTY_QUEUE);
     });
   });
 });
