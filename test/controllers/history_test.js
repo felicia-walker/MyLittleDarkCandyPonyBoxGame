@@ -22,8 +22,9 @@ describe('Controller: HistoryController', function() {
     $provide.value('HistoryService', serv);
   }));
 
-  beforeEach(inject(function($controller, _HistoryService_) {
+  beforeEach(inject(function($controller, $scope, _HistoryService_) {
     HistoryService = _HistoryService_;
+    scope = $scope;
     controller = $controller('HistoryController', {
       HistoryService : HistoryService
     });

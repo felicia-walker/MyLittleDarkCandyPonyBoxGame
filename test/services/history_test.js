@@ -10,12 +10,31 @@ describe('Service: HistoryService', function() {
 
   var HistoryService;
 
-  beforeEach(inject(function(_HistoryService_) {
-    HistoryService = _HistoryService_;
-  }));
+  // Mock out the time service
+  beforeEach(module('ponyApp', function($provide) {
+    serv = {
+      subscribe : function(subscriber) {
+        this.sub = subscriber;
+      }
+    }
 
-  it('Loaded', function() {
-    expect(HistoryService).toBeDefined();
+    spyOn(serv, 'subscribe').and.callThrough();
+
+    $provide.value('TimeService', serv);
+  }));
+  
+  beforeEach(inject(function(_HistoryService_, _TimeService_) {
+    HistoryService = _HistoryService_;
+    TimeService = _TimeService_;
+  }));
+  
+  // The tests
+  it('Initialize', function() {
+    HistoryService.init();
+    
+    expect(TimeService.subscribe).toHaveBeenCalled();
+    expect(TimeService.sub).toBeDefined();
+    expect(TimeService.sub).toBe(HistoryService);
   });
   
   it('Initial size is zero', function() {
