@@ -5,19 +5,19 @@ var app = angular.module('ponyApp', ['ui.bootstrap', 'ngRoute']);
 app.config(function($routeProvider) {
 	$routeProvider
 		.when('/tab/town', {
-			templateUrl: 'views/town.html',
+			templateUrl: 'tabs/town.html',
 			controller: 'TownController'
 		})
 		.when('/tab/roster', {
-			templateUrl: 'views/roster.html',
+			templateUrl: 'tabs/roster.html',
 			controller: 'RosterController'
 		})
 		.when('/tab/options', {
-			templateUrl: 'views/options.html',
+			templateUrl: 'tabs/options.html',
 			controller: 'OptionsController'
 		})
 		.when('/tab/achievements', {
-			templateUrl: 'views/achievements.html',
+			templateUrl: 'tabs/achievements.html',
 			controller: 'AchievementsController'
 		})
 		.otherwise({

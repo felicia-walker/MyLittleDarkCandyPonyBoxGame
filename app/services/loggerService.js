@@ -1,7 +1,7 @@
 'use strict';
 
 // TO DO: max size, debug messages, event levels
-angular.module('ponyApp').factory('HistoryService', ['TimeService', function(TimeService) {
+angular.module('ponyApp').factory('LoggerService', ['TimeService', function(TimeService) {
   var queue = [];
   var subscribers = [];
 
@@ -24,7 +24,7 @@ angular.module('ponyApp').factory('HistoryService', ['TimeService', function(Tim
   }
   
   function subscribe(subscriber) {
-    console.log("HistoryService - added subscriber");
+    console.log("LoggerService - added subscriber");
     subscribers.push(subscriber);
   }
 

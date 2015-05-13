@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
     <div class="navbar navbar-default" ng-controller="HeaderController as ctrl">
@@ -47,18 +47,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-route.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="lib/ui-bootstrap-tpls-0.12.1.js"></script>
+    <script src="assets/lib/ui-bootstrap-tpls-0.12.1.js"></script>
 
-    <script src="scripts/app.js"></script>
-    <script src="scripts/services/history.js"></script>
-    <script src="scripts/services/time.js"></script>
+    <script src="app.js"></script>
+    <script src="services/loggerService.js"></script>
+    <script src="services/timeService.js"></script>
 
-    <script src="scripts/controllers/header.js"></script>
-    <script src="scripts/controllers/history.js"></script>
-    <script src="scripts/controllers/tab.js"></script>
-    <script src="scripts/controllers/town.js"></script>
-    <script src="scripts/controllers/roster.js"></script>
-    <script src="scripts/controllers/options.js"></script>
-    <script src="scripts/controllers/achievements.js"></script>
+    <script src="components/headerController.js"></script>
+    <script src="components/historyController.js"></script>
+    <script src="components/tabController.js"></script>
+    <script src="tabs/townController.js"></script>
+    <script src="tabs/rosterController.js"></script>
+    <script src="tabs/optionsController.js"></script>
+    <script src="tabs/achievementsController.js"></script>
 </body>
 </html>

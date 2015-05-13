@@ -11,11 +11,11 @@ describe('Module: App', function() {
   }));
 
   function validateTab(name) {
-    httpBackend.expectGET('views/' + name + '.html').respond(200);
+    httpBackend.expectGET('tabs/' + name + '.html').respond(200);
     location.path('/tab/' + name);
     rootScope.$digest();
 
-    expect(route.current.templateUrl).toBe('views/' + name + '.html');
+    expect(route.current.templateUrl).toBe('tabs/' + name + '.html');
     expect(route.current.controller).toBe(name.charAt(0).toUpperCase() + name.slice(1) + 'Controller');
   }
 
@@ -26,11 +26,11 @@ describe('Module: App', function() {
     });
 
     it('invalid', function() {
-      httpBackend.expectGET('views/town.html').respond(200);
+      httpBackend.expectGET('tabs/town.html').respond(200);
       location.path('/invalid');
       rootScope.$digest();
 
-      expect(route.current.templateUrl).toBe('views/town.html');
+      expect(route.current.templateUrl).toBe('tabs/town.html');
       expect(route.current.controller).toBe('TownController');
     });
 
