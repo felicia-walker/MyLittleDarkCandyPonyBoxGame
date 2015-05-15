@@ -18,6 +18,7 @@ angular.module('ponyApp').factory('LoggerService', ['TimeService', function(Time
     queue = [];
   }
 
+  // Observer methods
   function update(ticks) {
     add(ticks);
     notifySubscribers();
