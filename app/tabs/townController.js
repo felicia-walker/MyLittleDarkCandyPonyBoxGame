@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('ponyApp').controller('TownController', ['$scope', 'TimeService', function($scope, TimeService) {
-  var self = this;
-  self.buttonText = "Start";
+  $scope.buttonText = "Start";
   
-  self.start = function() {
+  $scope.start = function() {
     if (TimeService.isPaused()) {
       self.buttonText = "Pause";
       TimeService.unpause();
