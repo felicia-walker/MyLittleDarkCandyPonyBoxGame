@@ -3,17 +3,18 @@ describe('Controller: HeaderController', function() {
 
   var controller;
   
-  beforeEach(inject(function($controller) {
-	  controller = $controller('HeaderController', {});
+  beforeEach(inject(function($controller, $rootScope) {
+      scope = $rootScope.$new();
+	  controller = $controller('HeaderController', {$scope: scope});
   }));
 
   describe('Versions', function() {
 	  it(', major', function() {
-	    expect(controller.major).toBe(0);
+	    expect(scope.major).toBe(0);
 	  });
 	  
 	  it(', minor', function() {
-		expect(controller.minor).toBe(2);
+		expect(scope.minor).toBe(2);
 	  });
   });
 });

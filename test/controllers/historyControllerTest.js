@@ -43,13 +43,13 @@ describe('Controller: HistoryController', function() {
   }));
 
   // Tests
-  describe('Logger queue is ', function() {
+  describe('Logger queue is', function() {
     it('empty', function() {
       LoggerService.queue = EMPTY_QUEUE;
       controller.update();
 
       expect(LoggerService.list).toHaveBeenCalled();
-      expect(controller.queue).toEqual(EMPTY_QUEUE);
+      expect(scope.queue).toEqual(EMPTY_QUEUE);
       expect(LoggerService.queue).toEqual(EMPTY_QUEUE);
     });
 
@@ -58,7 +58,7 @@ describe('Controller: HistoryController', function() {
       controller.update();
 
       expect(LoggerService.list).toHaveBeenCalled();
-      expect(controller.queue).toEqual(UNDER_RESULT);
+      expect(scope.queue).toEqual(UNDER_RESULT);
       expect(LoggerService.queue).toEqual(UNDER_QUEUE);
     });
 
@@ -68,7 +68,7 @@ describe('Controller: HistoryController', function() {
       controller.update();
 
       expect(LoggerService.list).toHaveBeenCalled();
-      expect(controller.queue).toEqual(OVER_MAX_RESULT);
+      expect(scope.queue).toEqual(OVER_MAX_RESULT);
       expect(LoggerService.queue).toEqual(MAX_QUEUE);
     });
     
@@ -77,7 +77,7 @@ describe('Controller: HistoryController', function() {
       controller.update();
 
       expect(LoggerService.list).toHaveBeenCalled();
-      expect(controller.queue).toEqual(OVER_MAX_RESULT);
+      expect(scope.queue).toEqual(OVER_MAX_RESULT);
       expect(LoggerService.queue).toEqual(OVER_QUEUE);
     });
   });
