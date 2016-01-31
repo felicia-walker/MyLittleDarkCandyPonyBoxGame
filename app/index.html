@@ -4,8 +4,9 @@
 <title>My Little Dark Candy Pony Box Game</title>
 <meta charset="utf-8">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="assets/css/main.css">
+
 </head>
 <body>
     <div class="navbar navbar-default" ng-controller="HeaderController">
@@ -29,12 +30,12 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3 panel panel-default" ng-controller="HistoryController">
+        <div class="col-lg-2 panel panel-default floatLeft" ng-controller="HistoryController">
             <div class="panel-body">
                 <p ng-repeat="line in queue track by $index">{{line}}</p>
             </div>
         </div>
-        <div class="col-md-9" ng-controller="TabController">
+        <div class="col-lg-10 floatLeft" ng-controller="TabController">
             <tabset>
                 <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" select="onTabSelected(tab.url)">
                     <div ng-view></div>
@@ -53,6 +54,7 @@
     <script src="services/loggerService.js"></script>
     <script src="services/timeService.js"></script>
 
+	<script src="components/artPanel/artPanelDirective.js"></script>
     <script src="components/headerController.js"></script>
     <script src="components/historyController.js"></script>
     <script src="components/tabController.js"></script>

@@ -1,5 +1,25 @@
 <h1>Town</h1>
 
-<div ng-controller="TownController">
-  <button type="button" class="btn btn-primary" data-toggle="button" ng-click='start()'>{{buttonText}}</button>
+<div id="tabContainer" class="container" ng-controller="TownController">
+	<div id="topWrapper" class="row">
+		<div id="topLeftWrapper" class="col-lg-9">
+			<div id="calendar" class="row green">Calendar</div>
+			<div id="artWrapper" class="row">
+				<div id="resourcesArt" class="col-lg-4 artPanel red">Resource Art</div>
+				<div id="foodArt" class="col-lg-4 artPanel green ">Food Art</div>
+				<div id="shelterArt" class="col-lg-4 artPanel blue">Shelter Art</div>
+			</div>
+		</div>
+		<div id="statsWrapper" class="col-lg-3">
+			<div id="stats" class="row statPanel red">Status</div>
+			<div id="pony" class="row statPanel green">Pony</div>
+		</div>
+	</div>
+	<div id="ground" class="row col-lg-12 red">Ground</div>
+	<div id="bottomWrapper" class="row">
+		<div id="resources" class="col-lg-3 resourcePanel green">Resources</div>
+		<div id="food" class="col-lg-3 resourcePanel blue">Food</div>
+		<div id="shelter" class="col-lg-3 resourcePanel green ">Shelter</div>
+		<div id="actions" class="col-lg-3 resourcePanel blue">Actions</div>
+	</div>
 </div>

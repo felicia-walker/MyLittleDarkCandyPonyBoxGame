@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ponyApp').controller('TownController', ['$scope', 'TimeService', function($scope, TimeService) {
+angular.module('ponyApp').controller('TownController', ['$scope', '$route', 'TimeService', function($scope, $route, TimeService) {
   $scope.buttonText = "Start";
   
   $scope.start = function() {
@@ -14,5 +14,4 @@ angular.module('ponyApp').controller('TownController', ['$scope', 'TimeService',
       TimeService.pause();
     }
   }
-  
 }]);

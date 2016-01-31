@@ -6,7 +6,7 @@ app.config(function($routeProvider) {
 	$routeProvider
 		.when('/tab/town', {
 			templateUrl: 'tabs/town.html',
-			controller: 'TownController'
+			controller: 'TownController',
 		})
 		.when('/tab/roster', {
 			templateUrl: 'tabs/roster.html',
