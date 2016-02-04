@@ -1,13 +1,13 @@
 <h1>Town</h1>
 
-<div id="tabContainer" class="container" ng-controller="TownController">
+<div id="townContainer" class="container tab" ng-controller="TownController">
 	<div id="topWrapper" class="row">
 		<div id="topLeftWrapper" class="col-lg-9">
 			<div id="calendar" class="row green">Calendar</div>
 			<div id="artWrapper" class="row">
-				<div id="resourcesArt" class="col-lg-4 artPanel red">Resource Art</div>
-				<div id="foodArt" class="col-lg-4 artPanel green ">Food Art</div>
-				<div id="shelterArt" class="col-lg-4 artPanel blue">Shelter Art</div>
+				<div art-panel id="resourcesArt" class="col-lg-4 artPanel" art="rect">Resource Art</div>
+				<div art-panel id="foodArt" class="col-lg-4 artPanel" art="pinkie">Food Art</div>
+				<div art-panel id="shelterArt" class="col-lg-4 artPanel" art="rect">Shelter Art</div>
 			</div>
 		</div>
 		<div id="statsWrapper" class="col-lg-3">

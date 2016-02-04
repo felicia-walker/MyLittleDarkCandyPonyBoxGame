@@ -1,9 +1,22 @@
 html, body {
-    height: 94%;
+	height: 94%;
+}
+
+pre {
+	background-color: #ffffff;
+	border: none;
+	display: block;
+	font-size: 13px;
+	line-height: 1.42857;
+	margin: 0px;
+	padding: 0px;
+	word-break: normal;
+	word-wrap: normal;
+	overflow: hidden;
 }
 
 .row, .panel {
-    height: 100%;
+	height: 100%;
 }
 
 .border {
@@ -11,10 +24,15 @@ html, body {
 	border-width: 1px;
 }
 
-#tabContainer {
+.tab {
 	height: 80%;
 	min-height: 630px;
 	min-width: 1200px;
+}
+
+#townContainer div {
+	padding: 0px;
+	margin: 0px;
 }
 
 #topWrapper, #bottomWrapper {

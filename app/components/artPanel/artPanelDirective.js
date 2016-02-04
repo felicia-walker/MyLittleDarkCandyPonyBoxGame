@@ -1,13 +1,12 @@
-angular.module('ponyApp').directive('artPanel', function () {
+angular.module("ponyApp").directive("artPanel", function () {
     return {
-        restrict: 'EA',       
-        scope: {},
-        template: '<pre>a' +
-        	'b' +
-        	'd'+
-        	'e'+
-        	'</pre>',
-        controller: controllerFunction, 
-        link: function ($scope, element, attrs) { } 
-    }
+    	restrict: 'A',
+    	scope: {
+    		artname: "=art"
+    	},
+        template: "<pre>{{artname}}</pre>",
+        link: function(scope, element) {
+
+        }
+    };
 });
