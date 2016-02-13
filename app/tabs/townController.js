@@ -16,7 +16,7 @@ angular.module('ponyApp').controller('TownController', ['$scope', '$route', 'Tim
   }
   
   $scope.dash ="Rainbow Dash";
-  $scope.pinkie = "Not <a href=\"http://google.com/\">Pinkie Pie</a> a link";
+  $scope.pinkie = "Not Pinkie Pie a link";
   $scope.rect = "1===o====o====o====o====o====o====o====o====0\n" +
                 "2                                          |\n" +
                 "3                                          |\n" +
