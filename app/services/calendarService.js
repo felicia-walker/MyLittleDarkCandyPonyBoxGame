@@ -1,13 +1,13 @@
 'use strict';
 
 // TODO Allow current amt initialization
-angular.module('ponyApp').factory('CalendarService', [ '$interval', function($interval) {
+angular.module('ponyApp').factory('CalendarService', [ '$interval', 'TimeService', function($interval, TimeService) {
 	var SEASONS = [ 'Spring', 'Summer', 'Autumn', 'Winter' ];
 
 	// Base is 1 day/min, 15 days/season, 4 seasons/60 days/year with 30 sec per
 	// night and day cycle
-	var TICKS_PER_DAY = 60;
-	var TICKS_PER_SUN = 30;
+	var TICKS_PER_DAY = 6;
+	var TICKS_PER_SUN = 3;
 	var DAYS_PER_SEASON = 15;
 	var DAY_MULT = .33;
 	var CYCLE_MULT = .33;
@@ -21,10 +21,9 @@ angular.module('ponyApp').factory('CalendarService', [ '$interval', function($in
 	var isNight = false;
 	var cycleTicks = 0;
 	var curSeasonIndex = 0;
-
-	var elapsedDays = 0;
-	var elapsedSeasons = 0;
+	var elapsedDays = 3;
 	var elapsedYears = 0;
+	var initialized = false;
 	
 	var dayMult = DAY_MULT;
 	var cycleMult = CYCLE_MULT;
@@ -38,28 +37,13 @@ angular.module('ponyApp').factory('CalendarService', [ '$interval', function($in
 		var offset = base * mult;
 		var min = base - offset;
 		var max = base + offset;
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    var num = Math.floor(Math.random() * (max - min + 1) + min);
+    console.log(min + " " + max + " " + num);
+    return num;
   }
 	
-	// Getters
 	function currentSeason() {
 		return SEASONS[curSeasonIndex];
-	}
-
-	function isNight() {
-		return isNight;
-	}
-
-	function elapsedDays() {
-		return elapsedDays;
-	}
-
-	function elapsedSeason() {
-		return elapsedSeasons;
-	}
-
-	function elapsedYears() {
-		return elapsedYears;
 	}
 
 	// Subscription management
@@ -99,7 +83,7 @@ angular.module('ponyApp').factory('CalendarService', [ '$interval', function($in
 		return unsubscribe(subscribersDay, subscriber);
 	}
 
-	function unsubscribeCyle(subscriber) {
+	function unsubscribeCycle(subscriber) {
 		return unsubscribe(subscribersCycle, subscriber);
 	}
 
@@ -113,26 +97,28 @@ angular.module('ponyApp').factory('CalendarService', [ '$interval', function($in
 
 	// Update and notification 
 	function update(ticks) {
+		console.log("Cal update - " + ticks + " " + elapsedDays);
 		if (ticks % ticksPerDay == 0) {
+			console.log("Cal update - new day");
 			elapsedDays += 1;
-			cycleClicks += 0;
+			cycleTicks += 0;
 			isNight = false;
 			ticksPerDay = getRandomInt(TICKS_PER_DAY, dayMult)
 
-			notifySubscribers(subscribersDay, elapsedDays);
+			notifySubscribersDay(subscribersDay, elapsedDays);
 			notifySubscribers(subscribersCycle, isNight);
 		}
 
 		cycleTicks += 1;
 		if (cycleTicks == ticksPerSun) {
+			console.log("Cal update - night");
 			isNight = true;
-			ticksPerSun = getRandomInt(TICKS_PER_Sun, cycleMult)
+			ticksPerSun = getRandomInt(TICKS_PER_SUN, cycleMult)
 
 			notifySubscribers(subscribersCycle, isNight);
 		}
 
 		if (elapsedDays % daysPerSeason == 0) {
-			elapsedSeasons += 1;
 			curSeasonIndex += 1;
 			daysPerSeason = getRandomInt(DAYS_PER_SEASON, seasonMult);
 
@@ -153,17 +139,28 @@ angular.module('ponyApp').factory('CalendarService', [ '$interval', function($in
 			subscriberList[i].update(value);
 		}
 	}
+	
+	function notifySubscribersDay(subscriberList, value) {
+		var len = subscriberList.length;
+		console.log("YYY " + value);
+		for (var i = 0; i < len; i++) {
+			subscriberList[i].updateDay(value);
+		}
+	}
 
 	// Build and return the service
 	function init() {
-		TimeService.subscribe(this);
+		if (!initialized) {
+			initialized = true;
+		  console.log('Calendar service - init');
+		  TimeService.subscribe(this);
+	  }
 	}
 
 	return {
 		isNight : isNight,
 		currentSeason: currentSeason,
-		elapsedDays : elapsedDays,
-		elapsedMonths : elapsedMonths,
+		elapsedDaysx : elapsedDays,
 		elapsedYears : elapsedYears,
 		subscribeDay : subscribeDay,
 		subscribeCycle : subscribeCycle,
@@ -172,6 +169,8 @@ angular.module('ponyApp').factory('CalendarService', [ '$interval', function($in
 		unsubscribeDay : unsubscribeDay,
 		unsubscribeCycle : unsubscribeCycle,
 		unsubscribeSeason : unsubscribeSeason,
-		unsubscriberYear : unsubscribeYear
+		unsubscribeYear : unsubscribeYear,
+		init: init,
+		update: update
 	}
 } ]);

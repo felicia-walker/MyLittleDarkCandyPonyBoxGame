@@ -1,20 +1,6 @@
 'use strict';
 
-angular.module('ponyApp').controller('TownController', ['$scope', '$route', 'TimeService', function($scope, $route, TimeService) {
-  $scope.buttonText = "Start";
-  
-  $scope.start = function() {
-    if (TimeService.isPaused()) {
-      self.buttonText = "Pause";
-      TimeService.unpause();
-      TimeService.start();
-    }
-    else {
-      self.buttonText = "Unpause";
-      TimeService.pause();
-    }
-  }
-  
+angular.module('ponyApp').controller('TownController', ['$scope', '$route', 'TimeService', function($scope, $route, TimeService) { 
   $scope.dash ="Rainbow Dash";
   $scope.pinkie = "Not Pinkie Pie a link";
   $scope.rect = "1===o====o====o====o====o====o====o====o====0\n" +

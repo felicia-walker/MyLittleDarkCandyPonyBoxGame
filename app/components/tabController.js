@@ -13,6 +13,9 @@ angular.module('ponyApp').controller('TabController', ['$scope', '$location', fu
   }, {
     title : 'Achievements',
     url : 'achievements'
+  }, {
+    title : 'Dev',
+    url : 'dev'
   }];
 
   $scope.onTabSelected = function(url) {

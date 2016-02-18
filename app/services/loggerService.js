@@ -25,7 +25,6 @@ angular.module('ponyApp').factory('LoggerService', ['TimeService', function(Time
   }
   
   function subscribe(subscriber) {
-    console.log("LoggerService - added subscriber");
     subscribers.push(subscriber);
   }
 
@@ -49,8 +48,12 @@ angular.module('ponyApp').factory('LoggerService', ['TimeService', function(Time
   }
 
   // Build and return the service
-  function init(){
-    TimeService.subscribe(this);
+  function init() {
+		if (!initialized) {
+			initialized = true;
+		  console.log('Logger service - init');
+		  TimeService.subscribe(this);
+	  }
   }
   
   return {
@@ -60,7 +63,6 @@ angular.module('ponyApp').factory('LoggerService', ['TimeService', function(Time
     clear: clear,
     update: update,
     subscribe: subscribe,
-    unsubscribe: unsubscribe,
-    notifySubscribers: notifySubscribers
+    unsubscribe: unsubscribe
   };
 }]);

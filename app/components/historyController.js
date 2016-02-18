@@ -3,8 +3,8 @@
 angular.module('ponyApp').controller('HistoryController', ['$scope', 'LoggerService', function($scope, LoggerService) {
   var self = this;
   
-  $scope.queue = [];
-  $scope.queueLength = 25;
+  self.queue = [];
+  self.queueLength = 25;
   
   this.update = function() {
     var queue = LoggerService.list();
@@ -14,14 +14,14 @@ angular.module('ponyApp').controller('HistoryController', ['$scope', 'LoggerServ
       queue = queue.slice(queuelen - self.queueLength);
     }
 
-    $scope.queue = queue.slice().reverse();
+    self.queue = queue.slice().reverse();
   };
   
   // Self initialization
-  $scope.init = function () {
+  self.init = function () {
     LoggerService.init();
     LoggerService.subscribe(self);
   }
  
-  $scope.init();
+  self.init();
 }]);

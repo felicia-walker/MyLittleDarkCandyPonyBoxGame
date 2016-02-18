@@ -1,0 +1,7 @@
+<h1>Development</h1>
+<div id="devContainer" class="container tab" ng-controller="DevController">
+	<div class="panel-body">
+		<p ng-repeat="time in curTimes">{{time.name}}: {{time.value}}</p>
+	</div>
+    <button type="button" class="btn btn-primary" data-toggle="button" ng-click="start()">{{buttonText}}</button>
+</div>

@@ -14,14 +14,7 @@ angular.module('ponyApp').factory('TimeService', [ '$interval', function($interv
 
 	var ticks = 0;
 
-	function pause() {
-		paused = true;
-	}
-
-	function unpause() {
-		paused = false;
-	}
-
+	// Data access
 	function isPaused() {
 		return paused;
 	}
@@ -34,8 +27,30 @@ angular.module('ponyApp').factory('TimeService', [ '$interval', function($interv
 		return ticks;
 	}
 
+	// Functionality
+	function start() {
+		if (!started) {
+			started = true;
+			timer = $interval(function() {
+				if (!paused) {
+					ticks += 1;
+					// console.log('Ticks: ' + ticks);
+					notifySubscribers();
+				}
+			}, 1000 * SEC_PER_TICK);
+		}
+	}
+
+	function pause() {
+		paused = true;
+	}
+
+	function unpause() {
+		paused = false;
+	}
+
+	// Observer methods
 	function subscribe(subscriber) {
-		console.log("TimeService - added subscriber");
 		subscribers.push(subscriber);
 	}
 
@@ -43,7 +58,7 @@ angular.module('ponyApp').factory('TimeService', [ '$interval', function($interv
 		var len = subscribers.length;
 		for (var i = 0; i < len; i++) {
 			if (subscribers[i] === subscriber) {
-				subscribers = subscribers.slice(i, i+1);
+				subscribers = subscribers.slice(i, i + 1);
 				return true;
 			}
 		}
@@ -58,19 +73,6 @@ angular.module('ponyApp').factory('TimeService', [ '$interval', function($interv
 		}
 	}
 
-	function start() {
-		if (!started) {
-			started = true;
-			timer = $interval(function() {
-				if (!paused) {
-					ticks += 1;
-					console.log('Ticks: ' + ticks);
-					notifySubscribers();
-				}
-			}, 1000 * SEC_PER_TICK);
-		}
-	}
-	
 	// Build and return the service
 	return {
 		start : start,
@@ -80,7 +82,6 @@ angular.module('ponyApp').factory('TimeService', [ '$interval', function($interv
 		isStarted : isStarted,
 		elapsedTicks : elapsedTicks,
 		subscribe : subscribe,
-		unsubscribe : unsubscribe,
-		notifySubscribers: notifySubscribers
+		unsubscribe : unsubscribe
 	}
 } ]);

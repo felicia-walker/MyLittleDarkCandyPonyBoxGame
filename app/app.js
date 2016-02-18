@@ -20,7 +20,11 @@ app.config(function($routeProvider) {
 			templateUrl: 'tabs/achievements.html',
 			controller: 'AchievementsController'
 		})
+		.when('/tab/dev', {
+			templateUrl: 'tabs/dev.html',
+			controller: 'DevController'
+		})
 		.otherwise({
 			redirectTo: '/tab/town'
 		});
-	});
+});
