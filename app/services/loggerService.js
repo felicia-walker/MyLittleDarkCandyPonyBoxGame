@@ -4,9 +4,10 @@
 angular.module('ponyApp').factory('LoggerService', ['TimeService', function(TimeService) {
   var queue = [];
   var subscribers = [];
+	var initialized = false;
 
   function add(text) {
-    console.log('History add: ' + text);
+    //console.log('History add: ' + text);
     queue.push(text);
   }
 
@@ -20,7 +21,7 @@ angular.module('ponyApp').factory('LoggerService', ['TimeService', function(Time
 
   // Observer methods
   function update(ticks) {
-    add(ticks);
+    //add(ticks);
     notifySubscribers();
   }
   

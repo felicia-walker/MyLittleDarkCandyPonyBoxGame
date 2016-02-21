@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-default" ng-controller="HeaderController">
+    <div class="navbar navbar-default" ng-controller="HeaderController as headerCtrl">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -21,26 +21,26 @@
             <p class="navbar-brand">My Little Dark Candy Pony Box Game</p>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-left">
-                    <li><p class="navbar-text">(v {{major}}.{{minor}})</p></li>
+                    <li><p class="navbar-text">(v {{headerCtrl.major}}.{{headerCtrl.minor}})</p></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li ng-repeat="link in links"><p class="navbar-text">{{link.title}}</p></li>
+                    <li ng-repeat="link in headerCtrl.links"><p class="navbar-text">{{link.title}}</p></li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-2 panel panel-default floatLeft" ng-controller="HistoryController">
+        <div class="col-lg-2 panel panel-default floatLeft" ng-controller="HistoryController as histCtrl">
             <div class="panel-body">
-                <p ng-repeat="line in queue track by $index">{{line}}</p>
+                <p ng-repeat="line in histCtrl.queue track by $index">{{line}}</p>
             </div>
         </div>
-        <div class="col-lg-10 floatLeft" ng-controller="TabController">
+        <div class="col-lg-10 floatLeft" ng-controller="TabController as tabCtrl">
             <tabset>
-                <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" select="onTabSelected(tab.url)">
-                    <div ng-view></div>
+                <tab ng-repeat="tab in tabCtrl.tabs" heading="{{tab.title}}" active="tab.active" select="onTabSelected(tab.url)">
                 </tab>
             </tabset>
+            <div ng-view></div>
         </div>
     </div>
 

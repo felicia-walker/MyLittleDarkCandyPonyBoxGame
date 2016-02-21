@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('ponyApp').controller('TabController', ['$scope', '$location', function($scope, $location) {
-  $scope.tabs = [{
+	var self = this;
+	
+	self.tabs = [{
     title : 'Town',
     url : 'town'
   }, {
@@ -18,7 +20,7 @@ angular.module('ponyApp').controller('TabController', ['$scope', '$location', fu
     url : 'dev'
   }];
 
-  $scope.onTabSelected = function(url) {
+	$scope.onTabSelected = function(url) {
     var route;
     
     if (typeof url === 'string') {

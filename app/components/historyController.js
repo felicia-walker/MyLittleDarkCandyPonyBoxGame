@@ -6,7 +6,7 @@ angular.module('ponyApp').controller('HistoryController', ['$scope', 'LoggerServ
   self.queue = [];
   self.queueLength = 25;
   
-  this.update = function() {
+  self.update = function() {
     var queue = LoggerService.list();
     var queuelen = queue.length;
     
