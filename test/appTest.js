@@ -16,7 +16,6 @@ describe('Module: App', function() {
     rootScope.$digest();
 
     expect(route.current.templateUrl).toBe('tabs/' + name + '.html');
-    expect(route.current.controller).toBe(name.charAt(0).toUpperCase() + name.slice(1) + 'Controller');
   }
 
   // The tests
@@ -31,7 +30,6 @@ describe('Module: App', function() {
       rootScope.$digest();
 
       expect(route.current.templateUrl).toBe('tabs/town.html');
-      expect(route.current.controller).toBe('TownController');
     });
 
     it('town tab', function() {

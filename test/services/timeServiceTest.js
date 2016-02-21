@@ -3,18 +3,16 @@ describe('Service: TimeService', function() {
 
 	var TimeService;
 	var sub = {
-			i : 1,
+			i : 0,
 			update : function(ticks) {
-				console.log("x" + this.i);
-				this.i = this.i + ticks;
+				this.i = 100 + ticks;
 			}
 		}
 
 		var sub2 = {
-			j : 1,
+			j : 0,
 			update : function(ticks) {
-				console.log("y" + this.j);
-				this.j += ticks;
+				this.j = 200 + ticks;
 			}
 		}
 
@@ -23,58 +21,51 @@ describe('Service: TimeService', function() {
 		$interval = _$interval_;
 	}));
 
-	it('Pause and unpause', function() {
+	it('Basic test with pause/unpause and subscriber/unsubscribe', function() {
 		spyOn(TimeService, 'pause').and.callThrough();
 		spyOn(TimeService, 'unpause').and.callThrough();
 
+		// Sub1 only
+		TimeService.subscribe(sub);
+		TimeService.start();
+		expect(TimeService.isStarted()).toBe(true);
+		expect(TimeService.isPaused()).toBe(false);
+		expect(TimeService.elapsedTicks()).toEqual(0);
+
+		// 1 sec, sub1 only
+		$interval.flush(1000)
+		expect(TimeService.elapsedTicks()).toEqual(1);
+		expect(sub.i).toEqual(101);
+		expect(sub2.j).toEqual(0);
+
+		// 5 sec, paused
 		TimeService.pause();
 		expect(TimeService.isPaused()).toBe(true);
 		expect(TimeService.pause.calls.count()).toEqual(1);
 		expect(TimeService.unpause.calls.count()).toEqual(0);
+		
+		$interval.flush(5000)
+		expect(TimeService.elapsedTicks()).toEqual(1);
+		expect(sub.i).toEqual(101);
+		expect(sub2.j).toEqual(0);
 
+		// 8.888 sec, unpaused, Sub1 and Sub2
+		TimeService.subscribe(sub2);
 		TimeService.unpause();
 		expect(TimeService.isPaused()).toBe(false);
 		expect(TimeService.pause.calls.count()).toEqual(1);
 		expect(TimeService.unpause.calls.count()).toEqual(1);
-
-		TimeService.pause();
-		expect(TimeService.isPaused()).toBe(true);
-		expect(TimeService.pause.calls.count()).toEqual(2);
-		expect(TimeService.unpause.calls.count()).toEqual(1);
-	});
-
-	it('Start ', function() {
-		spyOn(TimeService, 'notifySubscribers').and.callThrough();
 		
-		TimeService.start();
-		expect(TimeService.isStarted()).toBe(true);
-		expect(TimeService.elapsedTicks()).toEqual(0);
-		expect(TimeService.notifySubscribers.calls.count()).toEqual(0);
-
-		$interval.flush(1000)
-		expect(TimeService.elapsedTicks()).toEqual(1);
-		expect(TimeService.notifySubscribers.calls.count()).toEqual(1);
-
 		$interval.flush(8888)
 		expect(TimeService.elapsedTicks()).toEqual(9);
-		expect(TimeService.notifySubscribers.calls.count()).toEqual(9);
-	});
-
-	it('Subscribe/unsubscribe', function() {
-		TimeService.ticks = 5;
-		TimeService.subscribe(sub);
-		TimeService.notifySubscribers();
-		expect(sub.i).toEqual(6);
-		expect(sub2.j).toEqual(1);
-
-		TimeService.subscribe(sub2);
-		TimeService.notifySubscribers();
-		expect(sub.i).toEqual(11);
-		expect(sub2.j).toEqual(6);
-
+		expect(sub.i).toEqual(109);
+		expect(sub2.j).toEqual(209);
+		
+		// 3 sec, Sub1 unsubscribed
 		TimeService.unsubscribe(sub);
-		TimeService.notifySubscribers();
-		expect(sub.i).toEqual(11);
-		expect(sub2.j).toEqual(11);
+		$interval.flush(3000)
+		expect(TimeService.elapsedTicks()).toEqual(12);
+		expect(sub.i).toEqual(109);
+		expect(sub2.j).toEqual(212);
 	});
 });

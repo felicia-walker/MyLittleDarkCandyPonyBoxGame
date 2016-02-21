@@ -3,7 +3,6 @@
 // Time service provides a simple notification everytime a tick occurs, which
 // can be djusted to a certian number per second. It also supports pausing.
 
-// TODO Allow current amt initialization
 angular.module('ponyApp').factory('TimeService', [ '$interval', function($interval) {
 	var SEC_PER_TICK = 1;
 
@@ -34,7 +33,7 @@ angular.module('ponyApp').factory('TimeService', [ '$interval', function($interv
 			timer = $interval(function() {
 				if (!paused) {
 					ticks += 1;
-					// console.log('Ticks: ' + ticks);
+					//console.log('Ticks: ' + ticks);
 					notifySubscribers();
 				}
 			}, 1000 * SEC_PER_TICK);
@@ -58,7 +57,7 @@ angular.module('ponyApp').factory('TimeService', [ '$interval', function($interv
 		var len = subscribers.length;
 		for (var i = 0; i < len; i++) {
 			if (subscribers[i] === subscriber) {
-				subscribers = subscribers.slice(i, i + 1);
+				subscribers.splice(i, 1);
 				return true;
 			}
 		}
