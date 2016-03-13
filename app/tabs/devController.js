@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('ponyApp').controller('DevController',
-		[ '$scope', '$route', 'TimeService', 'CalendarService', function($scope, $route, TimeService, CalendarService) {
+		[ '$scope', '$route', 'TimeService', 'CalendarService', 'EventService', 
+		  function($scope, $route, TimeService, CalendarService, EventService) {
+			
 			var self = this;
 
 			self.curTimes = [ {
@@ -18,8 +20,8 @@ angular.module('ponyApp').controller('DevController',
 				value : CalendarService.elapsedYears()
 			} ];
 
-			self.update = function(type, value) {
-				self.curTimes[type].value = value;
+			self.update = function(event, value) {
+				self.curTimes[event.name.slice(-1)].value = value;
 			}
 
 			self.buttonText = "Start";
@@ -40,10 +42,10 @@ angular.module('ponyApp').controller('DevController',
 			// Self initialization
 			self.init = function() {
 				CalendarService.init();
-				CalendarService.subscribe(self, CalendarService.EVENT.DAY);
-				CalendarService.subscribe(self, CalendarService.EVENT.CYCLE);
-				CalendarService.subscribe(self, CalendarService.EVENT.SEASON);
-				CalendarService.subscribe(self, CalendarService.EVENT.YEAR);
+				EventService.subscribe('calendarService-' + CalendarService.EVENT.DAY, self.update);
+				EventService.subscribe('calendarService-' + CalendarService.EVENT.CYCLE, self.update);
+				EventService.subscribe('calendarService-' + CalendarService.EVENT.SEASON, self.update);
+				EventService.subscribe('calendarService-' + CalendarService.EVENT.YEAR, self.update);
 			}
 
 			self.init();

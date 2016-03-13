@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('ponyApp').controller('HistoryController', ['$scope', 'LoggerService', function($scope, LoggerService) {
+angular.module('ponyApp').controller('HistoryController', 
+		['$scope', 'LoggerService', 'EventService', 
+		 function($scope, LoggerService, EventService) {
+			
   var self = this;
   
   self.queue = [];
@@ -20,7 +23,7 @@ angular.module('ponyApp').controller('HistoryController', ['$scope', 'LoggerServ
   // Self initialization
   self.init = function () {
     LoggerService.init();
-    LoggerService.subscribe(self);
+    EventService.subscribe('loggerService-event', self.update);
   }
  
   self.init();

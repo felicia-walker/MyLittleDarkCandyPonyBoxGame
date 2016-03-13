@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ponyApp').factory('CalendarService', [ '$interval', 'TimeService', function($interval, TimeService) {
+angular.module('ponyApp').factory('CalendarService', [ '$rootScope', 'EventService', function($rootScope, EventService) {
 	var SEASONS = [ 'Spring', 'Summer', 'Autumn', 'Winter' ];
 	var EVENT_TYPE = {
 		DAY : 0,
@@ -17,8 +17,6 @@ angular.module('ponyApp').factory('CalendarService', [ '$interval', 'TimeService
 	var DAY_MULT = 0;
 	var CYCLE_MULT = 0;
 	var SEASON_MULT = 0;
-
-	var subscribers = [ [], [], [], [] ];
 
 	var curCycleTicks = 0;
 	var dayCount = 0;
@@ -68,37 +66,18 @@ angular.module('ponyApp').factory('CalendarService', [ '$interval', 'TimeService
 	function subscribe(subscriber, type) {
 		if (type >= EVENT_TYPE.DAY && type <= EVENT_TYPE.YEAR) {
 			// console.log("Calendar Service - added subscriber " + type);
-			subscribers[type].push(subscriber);
+			EventService.subscribe('calendarService-' + type, update);
 		} else {
 			console.log("Calendar Service ERROR - " + type + " is not a valid event type.");
 		}
-	}
-
-	function unsubscribe(subscriber, type) {
-		if (type >= EVENT_TYPE.DAY && type <= EVENT_TYPE.YEAR) {
-			var len = subscribers[type].length;
-			for (var i = 0; i < len; i++) {
-				if (subscribers[type][i] === subscriber) {
-					subscribers[type].splice(i, 1);
-					return true;
-				}
-			}
-		} else {
-			console.log("Calendar Service ERROR - " + type + " is not a valid event type.");
-		}
-
-		return false;
 	}
 
 	function notifySubscribers(type, value) {
-		var len = subscribers[type].length;
-		for (var i = 0; i < len; i++) {
-			subscribers[type][i].update(type, value);
-		}
+		$rootScope.$emit('calendarService-' + type, value);
 	}
 
 	// Update and notification
-	function update(ticks) {
+	function update(event, ticks) {
 		console.log("Cal update - " + ticks + " " + dayCount);
 
 		curCycleTicks += 1;
@@ -140,7 +119,7 @@ angular.module('ponyApp').factory('CalendarService', [ '$interval', 'TimeService
 	function init() {
 		if (!initialized) {
 			initialized = true;
-			TimeService.subscribe(this);
+			EventService.subscribe('timeService-tick', update);
 		}
 	}
 
@@ -150,10 +129,7 @@ angular.module('ponyApp').factory('CalendarService', [ '$interval', 'TimeService
 		currentlyNight : currentlyNight,
 		elapsedDays : elapsedDays,
 		elapsedYears : elapsedYears,
-		subscribe : subscribe,
-		unsubscribe : unsubscribe,
 		init : init,
-		update : update,
 		EVENT : EVENT_TYPE
 	}
 } ]);

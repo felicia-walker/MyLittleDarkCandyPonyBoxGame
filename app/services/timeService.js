@@ -3,10 +3,9 @@
 // Time service provides a simple notification everytime a tick occurs, which
 // can be djusted to a certian number per second. It also supports pausing.
 
-angular.module('ponyApp').factory('TimeService', [ '$interval', function($interval) {
+angular.module('ponyApp').factory('TimeService', [ '$interval', '$rootScope', 'EventService' , function($interval, $rootScope, EventService) {
 	var SEC_PER_TICK = 1;
 
-	var subscribers = [];
 	var paused = false;
 	var started = false;
 	var timer;
@@ -33,7 +32,7 @@ angular.module('ponyApp').factory('TimeService', [ '$interval', function($interv
 			timer = $interval(function() {
 				if (!paused) {
 					ticks += 1;
-					//console.log('Ticks: ' + ticks);
+					console.log('Ticks: ' + ticks);
 					notifySubscribers();
 				}
 			}, 1000 * SEC_PER_TICK);
@@ -48,28 +47,8 @@ angular.module('ponyApp').factory('TimeService', [ '$interval', function($interv
 		paused = false;
 	}
 
-	// Observer methods
-	function subscribe(subscriber) {
-		subscribers.push(subscriber);
-	}
-
-	function unsubscribe(subscriber) {
-		var len = subscribers.length;
-		for (var i = 0; i < len; i++) {
-			if (subscribers[i] === subscriber) {
-				subscribers.splice(i, 1);
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	function notifySubscribers() {
-		var len = subscribers.length;
-		for (var i = 0; i < len; i++) {
-			subscribers[i].update(ticks);
-		}
+		$rootScope.$emit('timeService-tick', ticks);
 	}
 
 	// Build and return the service
@@ -79,8 +58,6 @@ angular.module('ponyApp').factory('TimeService', [ '$interval', function($interv
 		unpause : unpause,
 		isPaused : isPaused,
 		isStarted : isStarted,
-		elapsedTicks : elapsedTicks,
-		subscribe : subscribe,
-		unsubscribe : unsubscribe
+		elapsedTicks : elapsedTicks
 	}
 } ]);
