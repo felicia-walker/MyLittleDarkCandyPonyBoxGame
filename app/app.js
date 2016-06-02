@@ -1,7 +1,4 @@
-'use strict';
-
 var app = angular.module('ponyApp', ['ui.bootstrap', 'ngRoute']);
-
 app.config(function($routeProvider) {
 	$routeProvider
 		.when('/tab/town', {

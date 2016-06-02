@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('ponyApp').controller('DevController',
 		[ '$scope', '$route', 'TimeService', 'CalendarService', 'EventService', 
 		  function($scope, $route, TimeService, CalendarService, EventService) {

@@ -1,5 +1,3 @@
-'use strict';
-
 // Time service provides a simple notification everytime a tick occurs, which
 // can be djusted to a certian number per second. It also supports pausing.
 

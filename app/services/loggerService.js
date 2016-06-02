@@ -1,5 +1,3 @@
-'use strict';
-
 // TO DO: max size, debug messages, event levels
 angular.module('ponyApp').factory('LoggerService', [ '$rootScope', 'EventService', function($rootScope, EventService) {
 	var queue = [];

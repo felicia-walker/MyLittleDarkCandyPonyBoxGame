@@ -1,6 +1,4 @@
-'use strict';
-
-angular.module('ponyApp').controller('HistoryController', 
+angular.module('ponyApp').controller('HistoryController',
 		['$scope', 'LoggerService', 'EventService', 
 		 function($scope, LoggerService, EventService) {
 			

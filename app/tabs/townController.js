@@ -1,6 +1,4 @@
-'use strict';
-
-angular.module('ponyApp').controller('TownController', ['$scope', '$route', 'TimeService', function($scope, $route, TimeService) { 
+angular.module('ponyApp').controller('TownController', ['$scope', '$route', 'TimeService', function($scope, $route, TimeService) {
   $scope.dash ="Rainbow Dash";
   $scope.pinkie = "Not Pinkie Pie a link";
   $scope.rect = "1===o====o====o====o====o====o====o====o====0\n" +

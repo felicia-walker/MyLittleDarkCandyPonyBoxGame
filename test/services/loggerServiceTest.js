@@ -20,21 +20,19 @@ describe('Service: LoggerService', function() {
 
     spyOn(serv, 'subscribe').and.callThrough();
 
-    $provide.value('TimeService', serv);
+    $provide.value('EventService', serv);
   }));
   
-  beforeEach(inject(function(_LoggerService_, _TimeService_) {
+  beforeEach(inject(function(_LoggerService_, _EventService_) {
     LoggerService = _LoggerService_;
-    TimeService = _TimeService_;
+    EventService = _EventService_;
   }));
   
   // The tests
   it('Initialize', function() {
     LoggerService.init();
     
-    expect(TimeService.subscribe).toHaveBeenCalled();
-    expect(TimeService.sub).toBeDefined();
-    expect(TimeService.sub).toBe(LoggerService);
+    expect(EventService.subscribe).toHaveBeenCalled();
   });
   
   it('Initial size is zero', function() {

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('ponyApp').factory('CalendarService', [ '$rootScope', 'EventService', function($rootScope, EventService) {
 	var SEASONS = [ 'Spring', 'Summer', 'Autumn', 'Winter' ];
 	var EVENT_TYPE = {

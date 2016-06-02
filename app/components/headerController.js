@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('ponyApp').controller('HeaderController', ['$scope', function($scope) {
 	var self = this;
 	

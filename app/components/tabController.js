@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('ponyApp').controller('TabController', ['$scope', '$location', function($scope, $location) {
 	var self = this;
 	

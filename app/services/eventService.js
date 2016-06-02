@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('ponyApp').factory('EventService', [ '$rootScope', function($rootScope) {
 	var subscribers = [];
 

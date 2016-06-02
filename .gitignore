@@ -10,3 +10,9 @@ test/lib/angular-mocks.js
 test/lib/ngMock.js
 target/KaramTestRunner-1.jar
 target/maven-archiver/pom.properties
+.idea/jsLibraryMappings.xml
+.idea/libraries/MyLittleDarkCandyPonyBoxGame_node_modules.xml
+.idea/modules.xml
+.idea/MyLittleDarkCandyPonyBoxGame.iml
+.idea/vcs.xml
+.idea/workspace.xml
