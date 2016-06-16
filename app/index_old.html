@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ponyApp">
+<head>
+<title>My Little Dark Candy Pony Box Game</title>
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/main.css">
+
+</head>
+<body>
+    <div class="navbar navbar-default" ng-controller="HeaderController as headerCtrl">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span> 
+                    <span class="icon-bar"></span> 
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <p class="navbar-brand">My Little Dark Candy Pony Box Game</p>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><p class="navbar-text">(v {{headerCtrl.major}}.{{headerCtrl.minor}})</p></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li ng-repeat="link in headerCtrl.links"><p class="navbar-text">{{link.title}}</p></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 panel panel-default floatLeft" ng-controller="HistoryController as histCtrl">
+            <div class="panel-body">
+                <p ng-repeat="line in histCtrl.queue track by $index">{{line}}</p>
+            </div>
+        </div>
+        <div class="col-lg-10 floatLeft" ng-controller="TabController as tabCtrl">
+            <tabset>
+                <tab ng-repeat="tab in tabCtrl.tabs" heading="{{tab.title}}" active="tab.active" select="onTabSelected(tab.url)">
+                </tab>
+            </tabset>
+            <div ng-view></div>
+        </div>
+    </div>
+
+    <script src="assets/lib/jquery.js"></script>
+    <script src="assets/lib/angular.js"></script>
+    <script src="assets/lib/angular-route.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="assets/lib/ui-bootstrap-tpls-0.12.1.js"></script>
+
+    <script src="app.js"></script>
+    <script src="services/eventService.js"></script>
+    <script src="services/loggerService.js"></script>
+    <script src="services/timeService.js"></script>
+    <script src="services/calendarService.js"></script>
+    
+	<script src="components/artPanel/artPanelDirective.js"></script>
+    <script src="components/headerController.js"></script>
+    <script src="components/historyController.js"></script>
+    <script src="components/tabController.js"></script>
+    <script src="tabs/townController.js"></script>
+    <script src="tabs/rosterController.js"></script>
+    <script src="tabs/optionsController.js"></script>
+    <script src="tabs/achievementsController.js"></script>
+    <script src="tabs/devController.js"></script>
+</body>
+</html>

@@ -1,23 +1,30 @@
 angular.module('ponyApp').factory('EventService', [ '$rootScope', function($rootScope) {
 	var subscribers = [];
+	var master_id = 1;
 
-	function Subscriber(event, callback, handler)
-	{
-		this.event = event;
-		this.callback = callback;
+	function Subscriber(id, handler) {
+		this.id = id
 		this.handler = handler;
 	}
-	
-	function subscribe(event, callback) {
-		var handler = $rootScope.$on(event, callback);
-		subscribers.push(new Subscriber(event, callback, handler));
+
+	function init() {
+		subscribers = [];
+		master_id = 1;
 	}
 
-	function unsubscribe(event, callback) {
+	function subscribe(event, callback) {
+		var handler = $rootScope.$on(event, callback);
+		master_id = master_id + 1;
+		subscribers.push(new Subscriber(master_id, handler));
+
+		return master_id;
+	}
+
+	function unsubscribe(id) {
 		var len = subscribers.length;
 		for (var i = 0; i < len; i++) {
-			if (subscribers[i].event === event && subscribers[i].callback === callback) {
-				subscribers[i].handler;
+			if (subscribers[i].id === id) {
+				subscribers[i].handler();
 				subscribers.splice(i, 1);
 				return true;
 			}
@@ -28,6 +35,7 @@ angular.module('ponyApp').factory('EventService', [ '$rootScope', function($root
 	
 	return {
 		subscribe : subscribe,
-		unsubscribe : unsubscribe
+		unsubscribe : unsubscribe,
+		init: init
 	}
 } ]);

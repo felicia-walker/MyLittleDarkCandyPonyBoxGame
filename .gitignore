@@ -16,3 +16,4 @@ target/maven-archiver/pom.properties
 .idea/MyLittleDarkCandyPonyBoxGame.iml
 .idea/vcs.xml
 .idea/workspace.xml
+app/app-min.js

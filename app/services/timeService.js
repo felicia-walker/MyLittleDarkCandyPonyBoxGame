@@ -30,7 +30,7 @@ angular.module('ponyApp').factory('TimeService', [ '$interval', '$rootScope', 'E
 			timer = $interval(function() {
 				if (!paused) {
 					ticks += 1;
-					console.log('Ticks: ' + ticks);
+					//console.log('Ticks: ' + ticks);
 					notifySubscribers();
 				}
 			}, 1000 * SEC_PER_TICK);
