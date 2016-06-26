@@ -4,7 +4,7 @@ angular.module('ponyApp').factory('LoggerService', [ '$rootScope', 'EventService
 	var initialized = false;
 
 	function add(text) {
-		// console.log('History add: ' + text);
+		//console.log('History add: ' + text);
 		queue.push(text);
 	}
 
@@ -17,8 +17,9 @@ angular.module('ponyApp').factory('LoggerService', [ '$rootScope', 'EventService
 	}
 
 	// Observer methods
-	function update(event, ticks) {
-		add(ticks);
+	function update(event, value) {
+		add(value);
+
 		notifySubscribers();
 	}
 
@@ -30,7 +31,7 @@ angular.module('ponyApp').factory('LoggerService', [ '$rootScope', 'EventService
 	function init() {
 		if (!initialized) {
 			initialized = true;
-			console.log('Logger service - init');
+			//console.log('Logger service - init');
 			EventService.subscribe('timeService-tick', update);
 		}
 	}
