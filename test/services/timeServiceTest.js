@@ -36,7 +36,7 @@ describe('Service: TimeService', function () {
         spyOn(TimeService, 'unpause').and.callThrough();
 
         // Sub1 only
-        var sub1 = $rootScope.$on('timeService-tick', s1.update.bind(s1));
+        var sub1 = $rootScope.$on(EventService.TIME_EVENTS.TICK, s1.update.bind(s1));
         TimeService.start();
         expect(TimeService.isStarted()).toBe(true);
         expect(TimeService.isPaused()).toBe(false);
@@ -60,7 +60,7 @@ describe('Service: TimeService', function () {
         expect(s2.j).toEqual(0);
 
         // 8.888 sec, unpaused, Sub1 and Sub2
-        var sub2 = $rootScope.$on('timeService-tick', s2.update.bind(s2));
+        var sub2 = $rootScope.$on(EventService.TIME_EVENTS.TICK, s2.update.bind(s2));
         TimeService.unpause();
         expect(TimeService.isPaused()).toBe(false);
         expect(TimeService.pause.calls.count()).toEqual(1);

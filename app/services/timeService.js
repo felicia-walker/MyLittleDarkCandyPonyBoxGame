@@ -9,7 +9,7 @@ angular.module('ponyApp').factory('TimeService', [ '$interval', '$rootScope', 'E
 	var timer;
 
 	var ticks = 0;
-
+	
 	// Data access
 	function isPaused() {
 		return paused;
@@ -46,7 +46,7 @@ angular.module('ponyApp').factory('TimeService', [ '$interval', '$rootScope', 'E
 	}
 
 	function notifySubscribers() {
-		$rootScope.$emit('timeService-tick', ticks);
+		$rootScope.$emit(EventService.TIME_EVENTS.TICK, ticks);
 	}
 
 	// Build and return the service

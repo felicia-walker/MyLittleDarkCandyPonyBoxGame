@@ -1,41 +1,59 @@
-angular.module('ponyApp').factory('EventService', [ '$rootScope', function($rootScope) {
-	var subscribers = [];
-	var master_id = 1;
+angular.module('ponyApp').factory('EventService', ['$rootScope', function ($rootScope) {
+    var subscribers = [];
+    var master_id = 1;
 
-	function Subscriber(id, handler) {
-		this.id = id
-		this.handler = handler;
-	}
+    var LOGGER_EVENTS = {
+        ADD: 'loggerService-add'
+    };
 
-	function init() {
-		subscribers = [];
-		master_id = 1;
-	}
+    var TIME_EVENTS = {
+        TICK: 'timeService-tick'
+    };
 
-	function subscribe(event, callback) {
-		var handler = $rootScope.$on(event, callback);
-		master_id = master_id + 1;
-		subscribers.push(new Subscriber(master_id, handler));
+    var CALENDAR_EVENTS = {
+        CYCLE: 'calendarService-cycle',
+        DAY: 'calendarService-day',
+        SEASON: 'calendarService-season',
+        YEAR: 'calendarService-year'
+    };
 
-		return master_id;
-	}
+    function Subscriber(id, handler) {
+        this.id = id
+        this.handler = handler;
+    }
 
-	function unsubscribe(id) {
-		var len = subscribers.length;
-		for (var i = 0; i < len; i++) {
-			if (subscribers[i].id === id) {
-				subscribers[i].handler();
-				subscribers.splice(i, 1);
-				return true;
-			}
-		}
+    function init() {
+        subscribers = [];
+        master_id = 1;
+    }
 
-		return false;
-	}
-	
-	return {
-		subscribe : subscribe,
-		unsubscribe : unsubscribe,
-		init: init
-	}
-} ]);
+    function subscribe(event, callback) {
+        var handler = $rootScope.$on(event, callback);
+        master_id = master_id + 1;
+        subscribers.push(new Subscriber(master_id, handler));
+
+        return master_id;
+    }
+
+    function unsubscribe(id) {
+        var len = subscribers.length;
+        for (var i = 0; i < len; i++) {
+            if (subscribers[i].id === id) {
+                subscribers[i].handler();
+                subscribers.splice(i, 1);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    return {
+        subscribe: subscribe,
+        unsubscribe: unsubscribe,
+        init: init,
+        LOGGER_EVENTS: LOGGER_EVENTS,
+        TIME_EVENTS: TIME_EVENTS,
+        CALENDAR_EVENTS: CALENDAR_EVENTS
+    }
+}]);

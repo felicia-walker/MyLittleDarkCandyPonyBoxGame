@@ -8,13 +8,8 @@ describe('Service: LoggerService', function () {
     var ONE_ITEM_QUEUE = [ONE];
     var MULT_ITEM_QUEUE = [ONE, THREE, TWO];
 
-    var testCallback = {
-        setA: function () {
-            a = 1;
-        }
-    };
-
     var LoggerService;
+    var EventService;
 
     beforeEach(inject(function (_LoggerService_, _EventService_, _$rootScope_) {
         LoggerService = _LoggerService_;
@@ -86,17 +81,16 @@ describe('Service: LoggerService', function () {
     });
 
     it('Logging an event', function () {
-        spyOn(testCallback, 'setA').and.callThrough();
-        $rootScope.$on('loggerService-event', testCallback.setA);
+        var testCallback = jasmine.createSpy('testCallback')
+        $rootScope.$on(EventService.LOGGER_EVENTS.ADD, testCallback);
         LoggerService.init();
 
-        $rootScope.$emit('timeService-tick', ONE);
-        $rootScope.$emit('timeService-tick', THREE);
-        $rootScope.$emit('timeService-tick', TWO);
+        $rootScope.$emit(EventService.TIME_EVENTS.TICK, ONE);
+        $rootScope.$emit(EventService.TIME_EVENTS.TICK, THREE);
+        $rootScope.$emit(EventService.TIME_EVENTS.TICK, TWO);
         var list = LoggerService.list();
 
         expect(list).toEqual(MULT_ITEM_QUEUE);
-        expect(testCallback.setA).toHaveBeenCalledTimes(3);
+        expect(testCallback).toHaveBeenCalledTimes(3);
     });
-})
-;
+});

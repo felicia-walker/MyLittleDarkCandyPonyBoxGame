@@ -24,7 +24,7 @@ angular.module('ponyApp').factory('LoggerService', [ '$rootScope', 'EventService
 	}
 
 	function notifySubscribers() {
-		$rootScope.$emit('loggerService-event');
+		$rootScope.$emit(EventService.LOGGER_EVENTS.ADD);
 	}
 
 	// Build and return the service
@@ -32,7 +32,7 @@ angular.module('ponyApp').factory('LoggerService', [ '$rootScope', 'EventService
 		if (!initialized) {
 			initialized = true;
 			//console.log('Logger service - init');
-			EventService.subscribe('timeService-tick', update);
+			EventService.subscribe(EventService.TIME_EVENTS.TICK, update);
 		}
 	}
 
